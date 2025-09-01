@@ -1,51 +1,60 @@
-/* Make body and html full width/height */
+/* -------- Reset / Page -------- */
+* { box-sizing: border-box; }
+
 html, body {
   margin: 0;
-  padding: 0;
-  width: 100%;
   height: 100%;
 }
 
-/* Dashboard container */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;    
+  align-items: flex-start;    
+}
+
+/* -------- Dashboard -------- */
 .dashboard-container {
-  min-height: 100vh;
-  width: 100%;
+  width: 170vw;
+  margin: 32px auto;           /* horizontal center + top spacing */
+  padding-left: 1000px;
+  margin-left: 200px;
+  position:relative;
+  background: rgba(159, 159, 156, 0.8);
+  border-radius: 12px;
+  border:  2px solid #8d1147;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+   height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  position: relative;
   text-align: center;
-  box-sizing: border-box;
-  z-index: 0;
-  /* Remove any background property here if it exists, or ensure it's transparent */
-  background-color: transparent; /* Explicitly set to transparent */
+  
 }
 
-/* Blurred full-screen background */
-.dashboard-container::before {
-  content: "";
-
-  top: 0;
-  left: 0;
-  width: 70vw;
-  height: 40vh;
-  /* background: url("https://tse4.mm.bing.net/th/id/OIP.qw7jWlGw5m8chRtingTpngHaE5?pid=ImgDet&w=199&h=131&c=7&dpr=1.5&o=7&rm=3")
-              no-repeat center center; */
-  background-size: cover;
-  filter: blur(4px);
-  z-index: -1;
+/* -------- Title ("My Notes") -------- */
+.My_notes {
+  margin: 0 0 12px;
+  padding: 30px;
+  font-size: 60px;
+  font-style:oblique;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: #0c5662;                 /* readable on blue background */
+  position: static;  
+  padding-left: 150px;          /* ensure not fixed */
 }
 
-/* Search bar styling */
+/* -------- Search Bar -------- */
 .search-bar {
-  width: 300px;
-  max-width: 90%;
+  width: min(420px, 100%);
   padding: 10px 14px;
-  margin: 20px 0;
-  border: 1px solid #ccc;
+  margin-left: 104px;
+  border: 2px solid #245128;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 20px;
+  gap: 30px;
   outline: none;
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
@@ -55,26 +64,25 @@ html, body {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Notes list container inside dashboard */
+/* -------- Notes Grid -------- */
 .notes-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  padding-top: 40px;
+  position:relative;
   width: 100%;
-  z-index: 1; /* make sure cards appear above blurred background */
-  /* If .notes-container also has a background, you'll need to make it transparent too */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: stretch;
 }
 
-/* Assuming your individual note cards have a background, you'll want to keep that. */
-/* Example for note-card (you didn't provide this CSS, but it's important for the look) */
-.note-card { /* Replace .note-card with your actual note card class name */
-  background-color: rgba(255, 255, 255, 0.8); /* Example: semi-transparent white for cards */
-  border-radius: 8px;
-  padding: 15px;
-  .note-card {
-  background-color: transparent;
-}
+/* -------- Note Card -------- */
+.note-card {
+  background: rgba(23, 210, 243, 0.95);
+  border-radius: 10px;
+  border: 2px solid red;
+  padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Other styling for your cards */
+  text-align: center;
+  font-size: 10px;
+  font-family:'Courier New', Courier, monospace ;
 }

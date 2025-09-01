@@ -7,7 +7,7 @@
     height: 100vh; 
     padding:0px;
     margin: 0px;
-    width: 100vw; 
+    width: 120vw; 
     margin-left:0px;    
     background-color:gray;
 }
@@ -18,7 +18,7 @@
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     width: 100%;
-    max-width: 380px;
+    max-width: 400px;
     text-align: center;
     box-sizing: border-box;
 }

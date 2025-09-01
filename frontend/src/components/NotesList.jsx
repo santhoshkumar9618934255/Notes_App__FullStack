@@ -34,10 +34,10 @@ const NotesList = ({ notes, onEdit, onDelete }) => {
 
             <div className="note-actions">
               <button className="fa fa-edit" onClick={()=>navigate(`/updatenotes/${note.id}`)}>
-                Edit
+                
               </button>
               <button className="fa fa-trash" onClick={() => onDelete(note.id)}>
-                Delete
+                
               </button>
             </div>
           </div>

@@ -143,36 +143,36 @@ const NewNotes = () => {
   }, [color, tool, isDrawing, startPos]);
 
   return (
-    <div className="notes-container">
-      <div className="toolbar">
-        <button className="tool-btn color-red" onClick={() => setColor("red")}></button>
-        <button className="tool-btn color-blue" onClick={() => setColor("blue")}></button>
-        <button className="tool-btn color-green" onClick={() => setColor("green")}></button>
-        <hr />
-        <button className="tool-btn" onClick={() => setTool("draw")}>✏️</button>
-        <button className="tool-btn" onClick={() => setTool("text")}>🔤</button>
-        <hr />
-        <button className="tool-btn" onClick={() => setTool("rect")}>▭</button>
-        <button className="tool-btn" onClick={() => setTool("square")}>⬛</button>
-        <button className="tool-btn" onClick={() => setTool("circle")}>⚪</button>
-        <button className="tool-btn" onClick={() => setTool("diamond")}>◆</button>
-      </div>
-
-      <div className="note-editor">
-        <input type="text" placeholder="Enter ID" ref={idRef} />
-        <input type="text" placeholder="Enter Title" ref={titleRef} />
-        <textarea placeholder="Enter Content" ref={contentRef}></textarea>
-        <canvas
-          ref={canvasRef}
-          width={500}
-          height={400}
-          style={{ border: "1px solid black", marginTop: "20px", background: "#fff" }}
-        ></canvas>
-        <br />
-        <button className="save-btn" onClick={load_data}>Add Note</button>
-      </div>
+  <div className="new-container">
+    <div className="new-toolbar">
+      <button className="new-tool-btn new-color-red" onClick={() => setColor("red")}></button>
+      <button className="new-tool-btn new-color-blue" onClick={() => setColor("blue")}></button>
+      <button className="new-tool-btn new-color-green" onClick={() => setColor("green")}></button>
+      <hr />
+      <button className="new-tool-btn" onClick={() => setTool("draw")}>✏️</button>
+      <button className="new-tool-btn" onClick={() => setTool("text")}>🔤</button>
+      <hr />
+      <button className="new-tool-btn" onClick={() => setTool("rect")}>▭</button>
+      <button className="new-tool-btn" onClick={() => setTool("square")}>⬛</button>
+      <button className="new-tool-btn" onClick={() => setTool("circle")}>⚪</button>
+      <button className="new-tool-btn" onClick={() => setTool("diamond")}>◆</button>
     </div>
-  );
-};
+
+    <div className="new-editor">
+      <input type="text" placeholder="Enter ID" ref={idRef} />
+      <input type="text" placeholder="Enter Title" ref={titleRef} />
+      <textarea placeholder="Enter Content" ref={contentRef}></textarea>
+      <canvas
+        ref={canvasRef}
+        width={500}
+        height={400}
+        style={{ border: "1px solid black", marginTop: "20px", background: "#fff" }}
+      ></canvas>
+      <br />
+      <button className="new-save-btn" onClick={load_data}>Add Note</button>
+    </div>
+  </div>
+);
+}
 
 export default NewNotes;
