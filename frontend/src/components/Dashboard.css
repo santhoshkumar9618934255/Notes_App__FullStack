@@ -1,0 +1,80 @@
+/* Make body and html full width/height */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dashboard container */
+.dashboard-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 0;
+  /* Remove any background property here if it exists, or ensure it's transparent */
+  background-color: transparent; /* Explicitly set to transparent */
+}
+
+/* Blurred full-screen background */
+.dashboard-container::before {
+  content: "";
+
+  top: 0;
+  left: 0;
+  width: 70vw;
+  height: 40vh;
+  /* background: url("https://tse4.mm.bing.net/th/id/OIP.qw7jWlGw5m8chRtingTpngHaE5?pid=ImgDet&w=199&h=131&c=7&dpr=1.5&o=7&rm=3")
+              no-repeat center center; */
+  background-size: cover;
+  filter: blur(4px);
+  z-index: -1;
+}
+
+/* Search bar styling */
+.search-bar {
+  width: 300px;
+  max-width: 90%;
+  padding: 10px 14px;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-bar:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Notes list container inside dashboard */
+.notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  z-index: 1; /* make sure cards appear above blurred background */
+  /* If .notes-container also has a background, you'll need to make it transparent too */
+}
+
+/* Assuming your individual note cards have a background, you'll want to keep that. */
+/* Example for note-card (you didn't provide this CSS, but it's important for the look) */
+.note-card { /* Replace .note-card with your actual note card class name */
+  background-color: rgba(255, 255, 255, 0.8); /* Example: semi-transparent white for cards */
+  border-radius: 8px;
+  padding: 15px;
+  .note-card {
+  background-color: transparent;
+}
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Other styling for your cards */
+}

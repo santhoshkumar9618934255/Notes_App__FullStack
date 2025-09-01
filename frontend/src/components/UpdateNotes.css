@@ -1,0 +1,10 @@
+.notes-container{
+    width: 70vw;
+}
+.note-editor>input{
+   width: 50vw;
+}
+
+.note-editor>textarea{
+   width: 50vw;
+}
