@@ -1,10 +1,128 @@
-.notes-container{
-    width: 70vw;
-}
-.note-editor>input{
-   width: 50vw;
+/* Container layout */
+.u-notes-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: 110vh;
+  width: 70vw;
+  margin-left: 1300px;
+  background: #496d92;
+  width: 60vw;
+  font-family: Arial, sans-serif;
 }
 
-.note-editor>textarea{
-   width: 50vw;
+/* Toolbar styling */
+.u-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: #2c3e50;
+  border-radius: 10px;
+  gap: 12px;
+  min-width: 60px;
+}
+
+/* Generic tool button */
+.u-tool-btn {
+  width: 50px;
+  height: 35px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ecf0f1;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.u-tool-btn:hover {
+  transform: scale(1.1);
+  background: #bdc3c7;
+}
+
+/* Color buttons (rectangular) */
+.color-red {
+  background: red;
+}
+
+.color-blue {
+  background: blue;
+}
+
+.color-green {
+  background: green;
+}
+
+.color-black {
+  background:black;
+}
+/* Note editor area */
+.u-note-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.u-update_title {
+  margin: 0;
+  font-size: 22px;
+  color: #2c3e50;
+  font-size: 40px;
+  margin-left: 280px;
+}
+
+.u-Title{
+   font-size: 30px;
+}
+.u-content{
+   font-size: 30px;
+}
+
+.u-note-editor input,
+.u-note-editor textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.u-note-editor textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Save button */
+.u-save-btn {
+  background: #2bb062;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  height: 60px;
+  width: 20vw;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 230px;
+
+}
+
+.u-save-btn:hover {
+  background: #2bb866;
+
+}
+
+/* Canvas */
+canvas {
+  border-radius: 8px;
+  height: 50vh;
 }

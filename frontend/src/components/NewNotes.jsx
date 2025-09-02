@@ -65,7 +65,7 @@ const NewNotes = () => {
     const ctx = canvas.getContext("2d");
 
     const startDrawing = (e) => {
-      if (tool === "draw") {
+      if (tool === "draw" || tool === "eraser") {
         ctx.beginPath();
         ctx.moveTo(e.offsetX, e.offsetY);
         setIsDrawing(true);
@@ -75,7 +75,17 @@ const NewNotes = () => {
     };
 
     const draw = (e) => {
+      // ✅ Eraser logic added
+      if (tool === "eraser" && isDrawing) {
+        ctx.globalCompositeOperation = "destination-out"; // erase pixels
+        ctx.lineWidth = 20; // eraser size
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        return;
+      }
+
       if (tool !== "draw" || !isDrawing) return;
+      ctx.globalCompositeOperation = "source-over"; // normal draw
       ctx.strokeStyle = color;
       ctx.lineWidth = 2;
       ctx.lineTo(e.offsetX, e.offsetY);
@@ -83,7 +93,7 @@ const NewNotes = () => {
     };
 
     const stopDrawing = (e) => {
-      if (tool === "draw") {
+      if (tool === "draw" || tool === "eraser") {
         setIsDrawing(false);
         ctx.closePath();
       } else if (startPos && ["rect", "circle", "square", "diamond"].includes(tool)) {
@@ -142,37 +152,53 @@ const NewNotes = () => {
     };
   }, [color, tool, isDrawing, startPos]);
 
-  return (
-  <div className="new-container">
-    <div className="new-toolbar">
-      <button className="new-tool-btn new-color-red" onClick={() => setColor("red")}></button>
-      <button className="new-tool-btn new-color-blue" onClick={() => setColor("blue")}></button>
-      <button className="new-tool-btn new-color-green" onClick={() => setColor("green")}></button>
-      <hr />
-      <button className="new-tool-btn" onClick={() => setTool("draw")}>✏️</button>
-      <button className="new-tool-btn" onClick={() => setTool("text")}>🔤</button>
-      <hr />
-      <button className="new-tool-btn" onClick={() => setTool("rect")}>▭</button>
-      <button className="new-tool-btn" onClick={() => setTool("square")}>⬛</button>
-      <button className="new-tool-btn" onClick={() => setTool("circle")}>⚪</button>
-      <button className="new-tool-btn" onClick={() => setTool("diamond")}>◆</button>
-    </div>
+  const clearCanvas = () => {
+    const ctx = canvasRef.current.getContext("2d");
+    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  };
 
-    <div className="new-editor">
-      <input type="text" placeholder="Enter ID" ref={idRef} />
-      <input type="text" placeholder="Enter Title" ref={titleRef} />
-      <textarea placeholder="Enter Content" ref={contentRef}></textarea>
-      <canvas
-        ref={canvasRef}
-        width={500}
-        height={400}
-        style={{ border: "1px solid black", marginTop: "20px", background: "#fff" }}
-      ></canvas>
-      <br />
-      <button className="new-save-btn" onClick={load_data}>Add Note</button>
+ 
+
+  return (
+    <div className="new-notes-container">
+
+      <div className="new-toolbar">
+        <button className="new-tool-btn color-red" onClick={() => setColor("red")}></button>
+        <button className="new-tool-btn color-blue" onClick={() => setColor("blue")}></button>
+        <button className="new-tool-btn color-green" onClick={() => setColor("green")}></button>
+        <button className="u-tool-btn color-black" onClick={() => setColor("black")}></button>
+        <hr />
+        <button className="new-tool-btn" onClick={() => setTool("draw")}>✏️</button>
+        <button className="new-tool-btn" onClick={() => setTool("text")}>🔤</button>
+        <button className="new-tool-btn" onClick={() => setTool("eraser")}>🧽</button>
+
+        <button className="new-tool-btn eraser" onClick={clearCanvas}>🧹</button>
+
+        <hr />
+        <button className="new-tool-btn" onClick={() => setTool("rect")}>▭</button>
+        <button className="new-tool-btn" onClick={() => setTool("square")}>⬛</button>
+        <button className="new-tool-btn" onClick={() => setTool("circle")}>⚪</button>
+        <button className="new-tool-btn" onClick={() => setTool("diamond")}>◆</button>
+      </div>
+
+      <div className="new-note-editor">
+        <h2 className="add_title">Add Notes</h2>
+        <input type="text" placeholder="Enter ID" ref={idRef} />
+
+        <input type="text" placeholder="Enter Title" ref={titleRef} />
+
+        <textarea placeholder="Enter Content" ref={contentRef}></textarea>
+        <canvas
+          ref={canvasRef}
+          width={500}
+          height={400}
+          style={{ border: "1px solid black", marginTop: "20px", background: "#fff" }}
+        ></canvas>
+        <br />
+        <button className="new-save-btn" onClick={load_data}>Add Note</button>
+      </div>
     </div>
-  </div>
-);
-}
+  );
+};
 
 export default NewNotes;

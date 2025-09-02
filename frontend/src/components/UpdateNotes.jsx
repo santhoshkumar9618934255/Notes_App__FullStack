@@ -162,25 +162,26 @@ const UpdateNotes = () => {
   }, [color, tool, isDrawing, startPos]);
 
   return (
-    <div className="notes-container">
-      <div className="toolbar">
-        <button className="tool-btn color-red" onClick={() => setColor("red")}></button>
-        <button className="tool-btn color-blue" onClick={() => setColor("blue")}></button>
-        <button className="tool-btn color-green" onClick={() => setColor("green")}></button>
+    <div className="u-notes-container">
+      <div className="u-toolbar">
+        <button className="u-tool-btn color-red" onClick={() => setColor("red")}></button>
+        <button className="u-tool-btn color-blue" onClick={() => setColor("blue")}></button>
+        <button className="u-tool-btn color-green" onClick={() => setColor("green")}></button>
+         <button className="u-tool-btn color-black" onClick={() => setColor("black")}></button>
         <hr />
-        <button className="tool-btn" onClick={() => setTool("draw")}>✏️</button>
-        <button className="tool-btn" onClick={() => setTool("text")}>🔤</button>
+        <button className="u-tool-btn" onClick={() => setTool("draw")}>✏️</button>
+        <button className="u-tool-btn" onClick={() => setTool("text")}>🔤</button>
         <hr />
-        <button className="tool-btn" onClick={() => setTool("rect")}>▭</button>
-        <button className="tool-btn" onClick={() => setTool("square")}>⬛</button>
-        <button className="tool-btn" onClick={() => setTool("circle")}>⚪</button>
-        <button className="tool-btn" onClick={() => setTool("diamond")}>◆</button>
+        <button className="u-tool-btn" onClick={() => setTool("rect")}>▭</button>
+        <button className="u-tool-btn" onClick={() => setTool("square")}>⬛</button>
+        <button className="u-tool-btn" onClick={() => setTool("circle")}>⚪</button>
+        <button className="u-tool-btn" onClick={() => setTool("diamond")}>◆</button>
       </div>
 
-      <div className="note-editor">
-        <h2 className="update_title">Update Note</h2>
-        <input type="text" placeholder="Enter Title" ref={titleRef} />
-        <textarea placeholder="Enter Content" ref={contentRef}></textarea>
+      <div className="u-note-editor">
+        <h2 className="u-update_title">Update Note</h2>
+        <input type="text" placeholder="Enter Title"  className="u-Title" ref={titleRef} />
+        <textarea placeholder="Enter Content"  className="u-content" ref={contentRef}></textarea>
         <canvas
           ref={canvasRef}
           width={500}
@@ -188,7 +189,7 @@ const UpdateNotes = () => {
           style={{ border: "1px solid black", marginTop: "20px", background: "#fff" }}
         ></canvas>
         <br />
-        <button className="save-btn" onClick={updateNote}>Update Note</button>
+        <button className="u-save-btn" onClick={updateNote}>Update Note</button>
       </div>
     </div>
   );

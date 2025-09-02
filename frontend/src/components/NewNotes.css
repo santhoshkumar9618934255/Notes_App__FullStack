@@ -1,99 +1,136 @@
-/* Outer wrapper */
-body, html {
-  margin: 10px 130px;
-  width: 10px;
-
+/* Container layout */
+.new-notes-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: 130vh;
+  width: 70vw;
+  margin-left: 1400px;
+  background: #496d92;
+  width: 60vw;
+  font-family: Arial, sans-serif;
 }
 
-.app-wrapper {
+/* Toolbar styling */
+.new-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: #2c3e50;
+  border-radius: 10px;
+  gap: 12px;
+  min-width: 60px;
+}
+
+.add_title{
+  margin-left: 300px;
+  font-size: 40px;
+  padding: 10px;
+}
+
+/* Generic tool button */
+.new-tool-btn {
+  width: 50px;
+  height: 35px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ecf0f1;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-
-  width: 10vh;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-/* Notes container */
-.new-notes-container {
-  display: flex;
- background-color:white;
-  border-radius: 12px;
-  margin-left: 1000px;
-  width: 100%;
-  padding-left: 100px;
-  max-width: 1000vw;
-  min-height: 50vh;
+.new-tool-btn:hover {
+  transform: scale(1.1);
+  background: #bdc3c7;
 }
 
-/* Toolbar */
-.toolbar {
-  width: 80px;
-  background: #222;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 12px 0;
-  border-right: 2px solid #444;
+/* Color buttons (rectangular) */
+.color-red {
+  background: red;
 }
 
-.tool-btn {
-  width: 40px;
-  height: 40px;
-  margin: 6px 0;
-  border-radius: 8px;
-  border: none;
-  background: #333;
-  cursor: pointer;
-  transition: 0.3s;
+.color-blue {
+  background: blue;
 }
 
-.tool-btn:hover {
-  background: #555;
+.color-green {
+  background: green;
 }
 
+.color-black {
+  background:black;
+}
 
-
-/* Editor */
-.note-editor {
+/* Note editor area */
+.new-note-editor {
   flex: 1;
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.note-editor input, .note-editor textarea {
+.new-update_title {
+  margin: 0;
+  font-size: 22px;
+  color: #2c3e50;
+  font-size: 40px;
+  margin-left: 280px;
+}
+
+.new-Title {
+  font-size: 30px;
+}
+
+.new-content {
+  font-size: 30px;
+}
+
+.new-note-editor input,
+.new-note-editor textarea {
   width: 100%;
-  margin-bottom: 15px;
   padding: 10px;
-  border-radius: 8px;
-  border: 2px solid #ccc;
-  font-size: 16px;
-  resize: none;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-.save-btn {
-  background: #4caf50;
+.new-note-editor textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Save button */
+.new-save-btn {
+  background: #2bb062;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
-  padding: 12px;
-  border-radius: 8px;
-  color: white;
-  font-size: 16px;
+  height: 60px;
+  width: 20vw;
+  border-radius: 6px;
   cursor: pointer;
-  width: 150px;
-  margin-bottom: 20px;
-  margin:5px 160px;
+  margin-left: 230px;
 }
 
-.save-btn:hover {
-  background: #45a049;
+.new-save-btn:hover {
+  background: #2bb866;
 }
 
+/* Canvas */
 canvas {
   border-radius: 8px;
+  height: 50vh;
 }
 
 
-.update_title{
-  margin-left:160px;
-}

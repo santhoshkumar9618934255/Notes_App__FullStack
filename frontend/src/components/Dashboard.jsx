@@ -44,20 +44,16 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <h1 className="My_notes">My Notes</h1>
 
-         <button onClick={add_notes} style={{
-        color: "white",
-        background: "blue",
-        border: "2px solid black",
-        borderRadius: "8px",
-        padding: "10px 20px",
-        fontSize: "16px",
-        cursor: "pointer"
-      }}>Add Notes</button>
+         
 
       <input type="text" placeholder="Search by Note ID..." value={searchId} onChange={(e) => setSearchId(e.target.value)} className="search-bar" />
      <br />
       <NotesList notes={filteredNotes} onDelete={handleDelete} />
+
+
+
       <br />
+      <button onClick={add_notes} className="add_notes_bt">Add Notes</button>
     
     </div>
   );

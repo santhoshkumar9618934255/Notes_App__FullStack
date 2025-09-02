@@ -1,11 +1,12 @@
 /* Container for all notes */
-.notes-container {
+.notesList-container {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
-  padding: 20px;
+  padding: 50px;
+  width: 70vw;
   justify-content: center;
-  background-color:rgb(192, 72, 72) ;
+  background-color:rgb(201, 234, 237) ;
  
   
 }

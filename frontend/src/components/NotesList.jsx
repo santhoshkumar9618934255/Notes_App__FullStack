@@ -10,7 +10,7 @@ const NotesList = ({ notes, onEdit, onDelete }) => {
   }
 
   return (
-    <div className="notes-container">
+    <div className="notesList-container">
       {notes.length === 0 ? (
         <p className="no-notes">No notes found.</p>
       ) : (

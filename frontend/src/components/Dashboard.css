@@ -1,36 +1,41 @@
 /* -------- Reset / Page -------- */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
+  width: 20vw;
 }
 
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
   display: flex;
-  justify-content: center;    
-  align-items: flex-start;    
+  justify-content: center;
+  align-items: flex-start;
 }
 
 /* -------- Dashboard -------- */
 .dashboard-container {
-  width: 170vw;
-  margin: 32px auto;           /* horizontal center + top spacing */
+  width: 160vw;
+  margin: 32px auto;
+  /* horizontal center + top spacing */
   padding-left: 1000px;
-  margin-left: 200px;
-  position:relative;
+  margin-left: 290px;
+  position: relative;
   background: rgba(159, 159, 156, 0.8);
   border-radius: 12px;
-  border:  2px solid #8d1147;
+  border: 2px solid #8d1147;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-   height: 95vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  
+
 }
 
 /* -------- Title ("My Notes") -------- */
@@ -38,19 +43,21 @@ body {
   margin: 0 0 12px;
   padding: 30px;
   font-size: 60px;
-  font-style:oblique;
+  font-style: oblique;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
-  color: #0c5662;                 /* readable on blue background */
-  position: static;  
-  padding-left: 150px;          /* ensure not fixed */
+  color: #0c5662;
+  /* readable on blue background */
+  position: static;
+  padding-left: 70px;
+  /* ensure not fixed */
 }
 
 /* -------- Search Bar -------- */
 .search-bar {
   width: min(420px, 100%);
   padding: 10px 14px;
-  margin-left: 104px;
+  margin-left: 50px;
   border: 2px solid #245128;
   border-radius: 8px;
   font-size: 20px;
@@ -67,7 +74,7 @@ body {
 /* -------- Notes Grid -------- */
 .notes-container {
   padding-top: 40px;
-  position:relative;
+  position: relative;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -84,5 +91,17 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 10px;
-  font-family:'Courier New', Courier, monospace ;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.add_notes_bt {
+     color: white;
+    background: blue;
+    border: 2px solid black;
+   
+    padding: 15px 50px;
+    font-Size: 20px;
+    margin-left:15px;
+    margin-bottom:20px;
+    cursor: pointer;
 }
