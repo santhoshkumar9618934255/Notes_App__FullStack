@@ -1,4 +1,7 @@
 /* Login.css */
+html,body{
+    width: 40vw;
+}
 
 .register-container {
     display: flex;
