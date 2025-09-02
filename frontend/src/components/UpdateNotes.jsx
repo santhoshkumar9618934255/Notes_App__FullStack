@@ -29,7 +29,6 @@ const UpdateNotes = () => {
           const ctx = canvasRef.current.getContext("2d");
           const img = new Image();
 
-          // ✅ Fix for tainted canvas
           img.crossOrigin = "anonymous";
           img.src = `http://localhost:8080/uploads/${note.drawing}`;
           img.onload = () =>
@@ -55,7 +54,6 @@ const UpdateNotes = () => {
       formData.append("title", titleRef.current.value);
       formData.append("content", contentRef.current.value);
 
-      // ✅ Convert canvas to Blob safely
       if (drawingData && drawingData !== "data:,") {
         try {
           const res = await fetch(drawingData);
@@ -84,7 +82,7 @@ const UpdateNotes = () => {
     const ctx = canvas.getContext("2d");
 
     const startDrawing = (e) => {
-      if (tool === "draw") {
+      if (tool === "draw" || tool === "eraser") {
         ctx.beginPath();
         ctx.moveTo(e.offsetX, e.offsetY);
         setIsDrawing(true);
@@ -94,15 +92,25 @@ const UpdateNotes = () => {
     };
 
     const draw = (e) => {
-      if (tool !== "draw" || !isDrawing) return;
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
-      ctx.lineTo(e.offsetX, e.offsetY);
-      ctx.stroke();
+      if (!isDrawing) return;
+
+      ctx.lineWidth = 20; // default size for both draw & eraser
+
+      if (tool === "draw") {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.strokeStyle = color;
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+      } else if (tool === "eraser") {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.strokeStyle = "rgba(0,0,0,1)";
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+      }
     };
 
     const stopDrawing = (e) => {
-      if (tool === "draw") {
+      if (tool === "draw" || tool === "eraser") {
         setIsDrawing(false);
         ctx.closePath();
       } else if (startPos && ["rect", "circle", "square", "diamond"].includes(tool)) {
@@ -161,16 +169,24 @@ const UpdateNotes = () => {
     };
   }, [color, tool, isDrawing, startPos]);
 
+  const clearCanvas = () => {
+    const ctx = canvasRef.current.getContext("2d");
+    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  };
+
   return (
     <div className="u-notes-container">
       <div className="u-toolbar">
         <button className="u-tool-btn color-red" onClick={() => setColor("red")}></button>
         <button className="u-tool-btn color-blue" onClick={() => setColor("blue")}></button>
         <button className="u-tool-btn color-green" onClick={() => setColor("green")}></button>
-         <button className="u-tool-btn color-black" onClick={() => setColor("black")}></button>
+        <button className="u-tool-btn color-black" onClick={() => setColor("black")}></button>
         <hr />
         <button className="u-tool-btn" onClick={() => setTool("draw")}>✏️</button>
         <button className="u-tool-btn" onClick={() => setTool("text")}>🔤</button>
+
+        <button className="new-tool-btn" onClick={() => setTool("eraser")}>🧽</button>
+        <button className="new-tool-btn eraser" onClick={clearCanvas}>🧹</button>
         <hr />
         <button className="u-tool-btn" onClick={() => setTool("rect")}>▭</button>
         <button className="u-tool-btn" onClick={() => setTool("square")}>⬛</button>
@@ -180,8 +196,8 @@ const UpdateNotes = () => {
 
       <div className="u-note-editor">
         <h2 className="u-update_title">Update Note</h2>
-        <input type="text" placeholder="Enter Title"  className="u-Title" ref={titleRef} />
-        <textarea placeholder="Enter Content"  className="u-content" ref={contentRef}></textarea>
+        <input type="text" placeholder="Enter Title" className="u-Title" ref={titleRef} />
+        <textarea placeholder="Enter Content" className="u-content" ref={contentRef}></textarea>
         <canvas
           ref={canvasRef}
           width={500}
