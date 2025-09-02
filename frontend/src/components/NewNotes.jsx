@@ -16,7 +16,7 @@ const NewNotes = () => {
   const [startPos, setStartPos] = useState(null);
 
   // Save data
-  const load_data = async (e) => {
+const load_data = async (e) => {
     e.preventDefault();
     try {
       const canvas = canvasRef.current;
@@ -75,7 +75,7 @@ const NewNotes = () => {
     };
 
     const draw = (e) => {
-      // ✅ Eraser logic added
+    
       if (tool === "eraser" && isDrawing) {
         ctx.globalCompositeOperation = "destination-out"; // erase pixels
         ctx.lineWidth = 20; // eraser size

@@ -20,13 +20,13 @@ body {
 
 /* -------- Dashboard -------- */
 .dashboard-container {
-  width: 160vw;
-  margin: 32px auto;
+  width: 100vw;
+  
   /* horizontal center + top spacing */
-  padding-left: 1000px;
-  margin-left: 290px;
+  padding-left: 10px;
+  margin-left: 2px;
   position: relative;
-  background: rgba(159, 159, 156, 0.8);
+  
   border-radius: 12px;
   border: 2px solid #8d1147;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -35,6 +35,13 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+
+
+   background-image: url("https://rukminim2.flixcart.com/image/640/661/xif0q/diary-notebook/p/d/v/set-of-6-colorful-unruled-eco-friendly-diaries-with-120-pages-original-imagz6hvwwygsu9y.jpeg?q=60");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
 }
 

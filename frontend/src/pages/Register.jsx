@@ -48,7 +48,7 @@ const Register = () => {
           <input type="password" ref={passwordRef} placeholder="Enter password" required />
           <button type="submit">Register</button>
 
-          <p className="account">
+          <p >
             Already have an account?{" "}
             <span
               style={{ color: "blue", cursor: "pointer" }}

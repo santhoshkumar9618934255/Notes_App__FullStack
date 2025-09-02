@@ -1,19 +1,17 @@
 /* Register.css */
-
 body, html {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
-  width: 150vw;
+  width: 100vw;   /* ✅ should be 100vw, not 150vw */
   margin: 0;
   padding: 0;
-  background: gray;
-  background-size: cover;
-  background-position: center;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
+
+  /* Background settings */
+ 
+  /* ❌ remove flex here */
 }
+
 
 
 .register-container {
@@ -24,18 +22,25 @@ body, html {
     width: 181vw;              /* Full width */
     margin: 0;                 /* Remove default margin */
     padding: 0;                /* Remove padding */
-    background-color: gray;    /* Background */
+       /* Background */
     box-sizing: border-box;    /* Prevent scroll issues */
+
+
+     background-image: url("https://static.vecteezy.com/system/resources/previews/000/952/504/original/user-login-page-with-two-characters-vector.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
 
 
 .register-form {
-  background-color: white;
+  background-color: rgb(49, 116, 242);
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   width: 100%;
-  margin-left: 1390px;
+  margin-left: 1300px;
   height: 70vh;
   max-width: 500px;
   text-align: center;
@@ -43,8 +48,10 @@ body, html {
 }
 
 .register-form h2 {
-  font-size: 2.2rem;
+  font-size: 46px;
   color: #333;
+  color: white;
+  border: 2px;
   margin-bottom: 25px;
   font-weight: 700;
 }
@@ -55,7 +62,7 @@ body, html {
   margin-bottom: 18px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 20px;
   color: #333;
   transition: all 0.3s ease;
   box-sizing: border-box;
@@ -76,7 +83,7 @@ body, html {
   padding: 15px;
   border: none;
   border-radius: 10px;
-  background-color: #007bff;
+  background-color:rgb(226, 65, 11);
   color: white;
   font-size: 1.15rem;
   font-weight: 600;
@@ -85,18 +92,18 @@ body, html {
 }
 
 .register-form button:hover {
-  background-color: #0056b3;
+  background-color: #143557;
   transform: translateY(-2px);
 }
 
 .register-form p {
   margin-top: 25px;
   font-size: 20px;
-  color: #666;
+  color: #f7eeee;
 }
 
 .register-form p span {
-  color: #007bff;
+  color: #1764ab;
   cursor: pointer;
   font-weight: 600;
   text-decoration: none;
@@ -104,7 +111,7 @@ body, html {
 }
 
 .register-form p span:hover {
-  color: #0056b3;
+  color: #bac3cd;
   text-decoration: underline;
 }
 

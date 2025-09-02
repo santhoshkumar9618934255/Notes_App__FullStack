@@ -1,14 +1,24 @@
 /* Container layout */
+
+html,body{
+  width: 100vw;
+   background-image: url("https://rukminim2.flixcart.com/image/640/661/xif0q/diary-notebook/p/d/v/set-of-6-colorful-unruled-eco-friendly-diaries-with-120-pages-original-imagz6hvwwygsu9y.jpeg?q=60");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .u-notes-container {
   display: flex;
   gap: 20px;
   padding: 20px;
   height: 110vh;
-  width: 70vw;
-  margin-left: 1300px;
+  width: 700vw;
+  margin-left: 110px;
   background: #496d92;
   width: 60vw;
   font-family: Arial, sans-serif;
+
+  
 }
 
 /* Toolbar styling */

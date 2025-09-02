@@ -1,14 +1,15 @@
 /* Container layout */
 .new-notes-container {
   display: flex;
-  gap: 20px;
-  padding: 20px;
-  height: 130vh;
+  gap: 10px;
+  padding: 10px;
+  height: 127vh;
   width: 70vw;
-  margin-left: 1400px;
+  margin-left: 140px;
   background: #496d92;
   width: 60vw;
   font-family: Arial, sans-serif;
+  border-radius: 40px;
 }
 
 /* Toolbar styling */
@@ -98,7 +99,7 @@
 .new-note-editor textarea {
   width: 100%;
   padding: 10px;
-  font-size: 15px;
+  font-size: 20px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
