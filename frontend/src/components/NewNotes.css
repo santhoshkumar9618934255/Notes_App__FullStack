@@ -3,7 +3,7 @@
   display: flex;
   gap: 10px;
   padding: 10px;
-  height: 127vh;
+  height: 139vh;
   width: 70vw;
   margin-left: 140px;
   background: #496d92;
@@ -128,7 +128,7 @@
   background: #2bb866;
 }
 
-/* Canvas */
+
 canvas {
   border-radius: 8px;
   height: 50vh;

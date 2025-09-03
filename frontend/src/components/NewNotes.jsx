@@ -15,8 +15,86 @@ const NewNotes = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [startPos, setStartPos] = useState(null);
 
-  // Save data
-const load_data = async (e) => {
+  // 🎤 Recording status: idle | recording | paused
+  const [recordingStatus, setRecordingStatus] = useState("idle");
+
+  let recognition;
+
+  // Initialize speech recognition
+  if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+  }
+
+  // ✅ Start Recording (unlimited times)
+  const startRecording = () => {
+    if (recognition) {
+      try {
+        recognition.start();
+        setRecordingStatus("recording");
+      } catch (e) {
+        recognition.stop();
+        recognition.start();
+        setRecordingStatus("recording");
+      }
+
+      recognition.onresult = (event) => {
+        let transcript = event.results[event.results.length - 1][0].transcript;
+        console.log("Voice Input:", transcript);
+
+        // Append to textarea
+        contentRef.current.value += " " + transcript;
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        setRecordingStatus("idle");
+      };
+
+      recognition.onend = () => {
+        if (recordingStatus === "recording") {
+          setRecordingStatus("paused"); // paused if ended unexpectedly
+        }
+      };
+    }
+  };
+
+  // ✅ Pause Recording
+  const pauseRecording = () => {
+    if (recognition && recordingStatus === "recording") {
+      recognition.stop();
+      setRecordingStatus("paused");
+    }
+  };
+
+  // ✅ Resume Recording
+  const resumeRecording = () => {
+    if (recognition && recordingStatus === "paused") {
+      try {
+        recognition.start();
+        setRecordingStatus("recording");
+      } catch (e) {
+        recognition.stop();
+        recognition.start();
+        setRecordingStatus("recording");
+      }
+    }
+  };
+
+  // ✅ Stop Recording
+  const stopRecording = () => {
+    if (recognition) {
+      recognition.stop();
+      setRecordingStatus("idle");
+    }
+  };
+
+  // ✅ Save Note Data
+  const load_data = async (e) => {
     e.preventDefault();
     try {
       const canvas = canvasRef.current;
@@ -29,7 +107,10 @@ const load_data = async (e) => {
 
       if (drawingData) {
         const byteString = atob(drawingData.split(",")[1]);
-        const mimeString = drawingData.split(",")[0].split(":")[1].split(";")[0];
+        const mimeString = drawingData
+          .split(",")[0]
+          .split(":")[1]
+          .split(";")[0];
         const ab = new ArrayBuffer(byteString.length);
         const ia = new Uint8Array(ab);
         for (let i = 0; i < byteString.length; i++) {
@@ -39,9 +120,13 @@ const load_data = async (e) => {
         formData.append("drawing", blob, "drawing.png");
       }
 
-      const res = await axios.post("http://localhost:8080/api/save", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axios.post(
+        "http://localhost:8080/api/save",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       console.log("Note saved:", res.data);
 
@@ -52,14 +137,13 @@ const load_data = async (e) => {
       const ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Navigate after success
       navigate("/dashboard");
     } catch (err) {
       console.error("Error saving note:", err);
     }
   };
 
-  // Drawing tools
+  // ✅ Drawing tools
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -75,17 +159,16 @@ const load_data = async (e) => {
     };
 
     const draw = (e) => {
-    
       if (tool === "eraser" && isDrawing) {
-        ctx.globalCompositeOperation = "destination-out"; // erase pixels
-        ctx.lineWidth = 20; // eraser size
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.lineWidth = 20;
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
         return;
       }
 
       if (tool !== "draw" || !isDrawing) return;
-      ctx.globalCompositeOperation = "source-over"; // normal draw
+      ctx.globalCompositeOperation = "source-over";
       ctx.strokeStyle = color;
       ctx.lineWidth = 2;
       ctx.lineTo(e.offsetX, e.offsetY);
@@ -96,7 +179,10 @@ const load_data = async (e) => {
       if (tool === "draw" || tool === "eraser") {
         setIsDrawing(false);
         ctx.closePath();
-      } else if (startPos && ["rect", "circle", "square", "diamond"].includes(tool)) {
+      } else if (
+        startPos &&
+        ["rect", "circle", "square", "diamond"].includes(tool)
+      ) {
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
 
@@ -157,11 +243,8 @@ const load_data = async (e) => {
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
   };
 
- 
-
   return (
     <div className="new-notes-container">
-
       <div className="new-toolbar">
         <button className="new-tool-btn color-red" onClick={() => setColor("red")}></button>
         <button className="new-tool-btn color-blue" onClick={() => setColor("blue")}></button>
@@ -171,9 +254,7 @@ const load_data = async (e) => {
         <button className="new-tool-btn" onClick={() => setTool("draw")}>✏️</button>
         <button className="new-tool-btn" onClick={() => setTool("text")}>🔤</button>
         <button className="new-tool-btn" onClick={() => setTool("eraser")}>🧽</button>
-
         <button className="new-tool-btn eraser" onClick={clearCanvas}>🧹</button>
-
         <hr />
         <button className="new-tool-btn" onClick={() => setTool("rect")}>▭</button>
         <button className="new-tool-btn" onClick={() => setTool("square")}>⬛</button>
@@ -184,19 +265,99 @@ const load_data = async (e) => {
       <div className="new-note-editor">
         <h2 className="add_title">Add Notes</h2>
         <input type="text" placeholder="Enter ID" ref={idRef} />
-
         <input type="text" placeholder="Enter Title" ref={titleRef} />
 
         <textarea placeholder="Enter Content" ref={contentRef}></textarea>
+
+        {/* 🎤 Voice Control Buttons */}
+        <div style={{ marginTop: "10px" }}>
+          <button
+            onClick={startRecording}
+            disabled={recordingStatus === "recording"}
+            style={{ marginRight: "10px", padding: "8px", background: "green", color: "white", border: "none", borderRadius: "6px" }}
+          >
+            🎤 Start
+          </button>
+          <button
+            onClick={pauseRecording}
+            disabled={recordingStatus !== "recording"}
+            style={{ marginRight: "10px", padding: "8px", background: "orange", color: "white", border: "none", borderRadius: "6px" }}
+          >
+            ⏸ Pause
+          </button>
+          <button
+            onClick={resumeRecording}
+            disabled={recordingStatus !== "paused"}
+            style={{ marginRight: "10px", padding: "8px", background: "blue", color: "white", border: "none", borderRadius: "6px" }}
+          >
+            ▶ Resume
+          </button>
+          <button
+            onClick={stopRecording}
+            disabled={recordingStatus === "idle"}
+            style={{ padding: "8px", background: "red", color: "white", border: "none", borderRadius: "6px" }}
+          >
+            ⏹ Stop
+          </button>
+        </div>
+
+        {/* 🎤 Status Indicator */}
+        <p style={{ marginTop: "10px", fontWeight: "bold" }}>
+          Status:{" "}
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              color:
+                recordingStatus === "recording"
+                  ? "green"
+                  : recordingStatus === "paused"
+                  ? "orange"
+                  : "red",
+            }}
+          >
+            {recordingStatus === "recording" && (
+              <span
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  background: "red",
+                  display: "inline-block",
+                  animation: "blink 1s infinite",
+                }}
+              ></span>
+            )}
+            {recordingStatus.toUpperCase()}
+          </span>
+        </p>
+
         <canvas
           ref={canvasRef}
           width={500}
           height={400}
-          style={{ border: "1px solid black", marginTop: "20px", background: "#fff" }}
+          style={{
+            border: "1px solid black",
+            marginTop: "20px",
+            background: "#fff",
+          }}
         ></canvas>
         <br />
-        <button className="new-save-btn" onClick={load_data}>Add Note</button>
+        <button className="new-save-btn" onClick={load_data}>
+          Add Note
+        </button>
       </div>
+
+      <style>
+        {`
+          @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+        `}
+      </style>
     </div>
   );
 };
