@@ -40,10 +40,17 @@ const Dashboard = () => {
     note.id.toString().includes(searchId)
   );
 
+
+  const logout=()=>{
+    navigate("/login")
+  }
   return (
     <div className="dashboard-container">
+      <button className="Logout" onClick={logout}>Logout</button>
+
       <h1 className="My_notes">My Notes</h1>
 
+      
          
 
       <input type="text" placeholder="Search by Note ID..." value={searchId} onChange={(e) => setSearchId(e.target.value)} className="search-bar" />

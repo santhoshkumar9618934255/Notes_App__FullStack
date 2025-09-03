@@ -38,6 +38,7 @@ body {
 
 
 
+
    background-image: url("https://rukminim2.flixcart.com/image/640/661/xif0q/diary-notebook/p/d/v/set-of-6-colorful-unruled-eco-friendly-diaries-with-120-pages-original-imagz6hvwwygsu9y.jpeg?q=60");
   background-size: cover;
   background-position: center;
@@ -60,6 +61,20 @@ body {
   /* ensure not fixed */
 }
 
+
+.Logout{
+  font-size: 20px;
+   text-align: right;
+   margin-left: 85vw;
+   margin-top: 10px;
+   background: orange;
+   position: fixed;
+}
+
+.Logout:hover{
+  color: white;
+  background: red;
+}
 /* -------- Search Bar -------- */
 .search-bar {
   width: min(420px, 100%);

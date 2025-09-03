@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-//import "./Login.css";
 
 const Login = () => {
   const emailRef = useRef();
@@ -16,15 +15,31 @@ const Login = () => {
         password: passwordRef.current.value,
       });
 
-      if (result.data.message === "Login Success") {
-        alert("Login Success");
+      if (result.data.token) {
+        // store token
+        localStorage.setItem("token", result.data.token);
 
-        // if token is sent, store it
-        if (result.data.token) {
-          localStorage.setItem("token", result.data.token);
+        // verify token with backend
+        try {
+          const verify = await axios.get(
+            "http://localhost:8080/api/user/verify-token",
+            {
+              headers: {
+                Authorization: `Bearer ${result.data.token}`,
+              },
+            }
+          );
+
+          if (verify.data.valid) {
+            alert("Login Success");
+            navigate("/dashboard"); 
+          } else {
+            alert("Token verification failed. Please login again.");
+          }
+        } catch (err) {
+          console.error("Token verification error:", err);
+          alert("Token verification failed. Please login again.");
         }
-
-        navigate("/dashboard");
       } else {
         alert(result.data.message || "Invalid credentials");
       }
