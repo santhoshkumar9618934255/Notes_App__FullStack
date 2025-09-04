@@ -21,7 +21,7 @@ const NotesList = ({ notes, onEdit, onDelete }) => {
 
             {/* Display text content */}
             {note.context && <p className="note-content">Content:{note.context}</p>}
-
+                 
             {/* Display drawing if exists */}
             {/* {note.drawingURL && (
               <img
@@ -31,7 +31,7 @@ const NotesList = ({ notes, onEdit, onDelete }) => {
                 style={{ width: "300px", border: "1px solid #ccc", marginTop: "10px" }}
               />
             )} */}
-
+              
             <div className="note-actions">
               <button className="fa fa-edit" onClick={()=>navigate(`/updatenotes/${note.id}`)}>
                 
