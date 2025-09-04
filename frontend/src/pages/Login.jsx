@@ -33,6 +33,7 @@ const Login = () => {
           if (verify.data.valid) {
             alert("Login Success");
             navigate("/dashboard"); 
+            localStorage.removeItem("token");
           } else {
             alert("Token verification failed. Please login again.");
           }

@@ -50,9 +50,6 @@ const Dashboard = () => {
 
       <h1 className="My_notes">My Notes</h1>
 
-      
-         
-
       <input type="text" placeholder="Search by Note ID..." value={searchId} onChange={(e) => setSearchId(e.target.value)} className="search-bar" />
      <br />
       <NotesList notes={filteredNotes} onDelete={handleDelete} />
